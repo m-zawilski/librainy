@@ -4,13 +4,11 @@ import {
   IsNumber,
   IsPositive,
   IsString,
-  IsUUID,
 } from 'class-validator';
-import { Expose, Exclude } from 'class-transformer';
 
 export class CreateBookDto {
-  @IsUUID()
-  id: string;
+  @IsNumber()
+  id: number;
 
   @IsString()
   @IsNotEmpty()
@@ -28,20 +26,5 @@ export class CreateBookDto {
   createdAt: Date;
 
   @IsDate()
-  modifiedAt: Date;
-}
-
-export class BookResponseDto {
-  @Exclude()
-  id: string;
-
-  title: string;
-  author: string;
-  pageCount: number;
-
-  @Exclude()
-  createdAt: Date;
-
-  @Exclude()
   modifiedAt: Date;
 }

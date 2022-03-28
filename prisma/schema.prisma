@@ -13,12 +13,12 @@ datasource db {
 model User {
   id                    Int @id @default(autoincrement())
   name                  String
-  email                 String
+  email                 String @unique
   password              String
   user_type             UserType
   created_at            DateTime @default(now())
   updated_at            DateTime @updatedAt
-  readings              Reading[]
+  books                 Book[]
 }
 
 model Book {
@@ -28,9 +28,11 @@ model Book {
   page_count            Int
   category              CategoryType
   language              LanguageType
+  user_id               Int 
   created_at            DateTime @default(now())
   updated_at            DateTime @updatedAt
   readings              Reading[]
+  user                  User @relation(fields: [user_id], references: [id])
 }
 
 model Author {
@@ -49,9 +51,7 @@ model Reading {
   created_at            DateTime @default(now())
   updated_at            DateTime @updatedAt
   book_id               Int
-  user_id               Int 
   book                  Book @relation(fields: [book_id], references: [id])
-  user                  User @relation(fields: [user_id], references: [id])
 }
 
 enum CategoryType {
