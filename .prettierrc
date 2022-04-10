@@ -1,4 +1,18 @@
 {
+  "tabWidth": 2,
   "singleQuote": true,
-  "trailingComma": "all"
+  "jsxSingleQuote": true,
+  "importOrder": [
+    "^react(.*)$",
+    "^[^/]+$",
+    "^@mui/(.*)$",
+    "^@core/(.*)$",
+    "^@server/(.*)$",
+    "^@ui/(.*)$",
+    "^@types/(.*)$",
+    "^[./]"
+  ],
+  "trailingComma": "all",
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }

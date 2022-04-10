@@ -42,6 +42,7 @@ export class AuthService {
         email,
         password: hashedPassword,
         user_type: UserType.USER,
+        reading_goal: 30,
       },
     });
 

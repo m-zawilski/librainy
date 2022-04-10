@@ -1,25 +1,26 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { BooksController } from './books/books.controller';
-import { BooksModule } from './books/books.module';
-import { BooksService } from './books/books.service';
+import { BookController } from './book/book.controller';
+import { BookModule } from './book/book.module';
+import { BookService } from './book/book.service';
 import { UserModule } from './user/user.module';
-import { AuthorModule } from './author/author.module';
 import { ReadingModule } from './reading/reading.module';
 import { PrismaModule } from './prisma/prisma.module';
-import { APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { UserInterceptor } from './user/interceptors/user.interceptor';
+import { AuthGuard } from './guards/auth.guard';
 
 @Module({
-  imports: [BooksModule, UserModule, AuthorModule, ReadingModule, PrismaModule],
-  controllers: [AppController, BooksController],
+  imports: [BookModule, UserModule, ReadingModule, PrismaModule],
+  controllers: [BookController],
   providers: [
-    AppService,
-    BooksService,
+    BookService,
     {
       provide: APP_INTERCEPTOR,
       useClass: UserInterceptor,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
     },
   ],
 })
