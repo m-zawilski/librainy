@@ -14,7 +14,7 @@ import { Roles } from 'src/decorators/role.decorator';
 import { UserType } from '@prisma/client';
 
 @Roles(UserType.ADMIN)
-@Controller('user')
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 

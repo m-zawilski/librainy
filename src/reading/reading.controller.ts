@@ -14,7 +14,7 @@ import { CreateReadingDto } from './dto/create-reading.dto';
 import { UpdateReadingDto } from './dto/update-reading.dto';
 import { BookService } from 'src/book/book.service';
 
-@Controller('reading')
+@Controller('readings')
 export class ReadingController {
   constructor(
     private readonly readingService: ReadingService,
