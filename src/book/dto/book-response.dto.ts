@@ -9,6 +9,11 @@ export class BookResponseDto {
   category: CategoryType;
   language: LanguageType;
 
+  @Expose({ name: 'progress' })
+  progress() {
+    return this.readings.length > 0 ? this.readings[0].page_read_count : 0;
+  }
+
   @Expose({ name: 'readings' })
   readingsList() {
     return this.readings.map((reading) => new ReadingResponseDto(reading));
@@ -48,3 +53,5 @@ export class BookResponseDto {
     Object.assign(this, partial);
   }
 }
+
+export type BookState = 'not_started' | 'in_progress' | 'finished';

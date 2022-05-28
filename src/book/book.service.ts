@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { UserType } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthenticatedUser } from 'src/user/decorators/user.decorator';
 import { BookResponseDto } from './dto/book-response.dto';
@@ -25,9 +26,36 @@ export class BookService {
     });
   }
 
+  async findAllOfAdmin(): Promise<BookResponseDto[]> {
+    const books = await this.prismaService.book.findMany({
+      where: {
+        user: {
+          user_type: UserType.ADMIN,
+        },
+      },
+      include: {
+        readings: {
+          orderBy: {
+            date: 'desc',
+          },
+        },
+      },
+    });
+    return books.map((book) => {
+      return new BookResponseDto(book);
+    });
+  }
+
   async findAllByUser(user: AuthenticatedUser): Promise<BookResponseDto[]> {
     const books = await this.prismaService.book.findMany({
       where: { user_id: user.id },
+      include: {
+        readings: {
+          orderBy: {
+            date: 'desc',
+          },
+        },
+      },
     });
     return books.map((book) => {
       return new BookResponseDto(book);

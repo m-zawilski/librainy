@@ -29,7 +29,7 @@ model Book {
   page_count            Int
   category              CategoryType
   language              LanguageType
-  user_id               Int 
+  user_id               Int
   created_at            DateTime @default(now())
   updated_at            DateTime @updatedAt
   readings              Reading[]

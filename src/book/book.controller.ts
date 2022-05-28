@@ -24,7 +24,11 @@ export class BookController {
 
   @Get()
   findAll(@User() user: AuthenticatedUser) {
-    return this.bookService.findAllByUser(user);
+    if (user) {
+      return this.bookService.findAllByUser(user);
+    } else {
+      return this.bookService.findAllOfAdmin();
+    }
   }
 
   @Get(':id')
